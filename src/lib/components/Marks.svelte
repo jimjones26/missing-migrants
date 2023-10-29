@@ -1,21 +1,20 @@
 <script lang="ts">
-	export let data: Array<MigrantDataItem>;
+	export let data: any;
 	export let yScale: any;
-	export let yValue: any;
 	export let xScale: any;
-	export let xValue: any;
-	export let circleRadius: number;
+	export let innerHeight: number;
 	export let opacity: number;
 </script>
 
 {#each data as item, i}
-	<circle
-		cx={xScale(xValue(item))}
-		cy={yScale(yValue(item))}
-		r={circleRadius}
+	<rect
+		x={xScale(item.x0)}
+		y={yScale(item.y)}
+		width={xScale(item.x1) - xScale(item.x0)}
+		height={innerHeight - yScale(item.y)}
 		fill="#137B80"
 		{opacity}
 	>
 		<title>hover</title>
-	</circle>
+	</rect>
 {/each}

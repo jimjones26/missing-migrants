@@ -3,8 +3,6 @@
 	export let xScale: any;
 	export let tickOffset: number = 5;
 	export let formatTime: any;
-
-	console.log('xScale.ticks(): ', xScale.ticks());
 </script>
 
 {#each xScale.ticks() as tick, i}
