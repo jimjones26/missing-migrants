@@ -1,6 +1,8 @@
 <script lang="ts">
 	import type { Writable } from 'svelte/store';
 	import { getContext } from 'svelte';
+	import * as d3 from 'd3';
+
 	import AxisY from '$lib/components/AxisY.svelte';
 	import AxisX from '$lib/components/AxisX.svelte';
 	import Marks from '$lib/components/Marks.svelte';
@@ -16,13 +18,22 @@
 	const innerHeight = height - margin.top - margin.bottom;
 	const innerWidth = width - margin.left - margin.right;
 
-	console.log($migrantsData.migrants[0]);
+	// y axis value, label, and scale (total dead and missing)
+	const yValue = (item: MigrantDataItem) => item['Total Dead and Missing'];
+	const yValueLabel = 'Total Dead and Missing';
+	const yScale = d3
+		.scaleLinear()
+		.domain(<Iterable<number>>d3.extent($migrantsData.migrants, yValue))
+		.range([innerHeight, 0])
+		.nice();
+
+	console.log('$migrantsData.migrants: ', $migrantsData.migrants[0]);
 </script>
 
 <!-- SVG Container -->
 <svg {width} {height}>
 	<g transform={`translate(${margin.left}, ${margin.top})`}>
-		<AxisY />
+		<AxisY {yScale} {innerWidth} tickOffset={10} />
 		<AxisX />
 		<Marks />
 	</g>

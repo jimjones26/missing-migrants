@@ -1,7 +1,7 @@
 interface MigrantDataItem {
-  reported_date?: string;
-  total_dead_missing?: number;
-  location_coordinates?: string;
+  "Reported Date"?: string;
+  "Total Dead and Missing"?: number;
+  "Location Coordinates"?: string;
 }
 
 interface MigrantsData {
