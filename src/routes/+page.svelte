@@ -20,7 +20,7 @@
 
 	// y axis value, label, and scale (total dead and missing)
 	const yValue = (item: MigrantDataItem) => item['Total Dead and Missing'];
-	const yValueLabel = 'Total Dead and Missing';
+	const yAxisLabel = 'Total Dead and Missing';
 	const yScale = d3
 		.scaleLinear()
 		.domain(<Iterable<number>>d3.extent($migrantsData.migrants, yValue))
@@ -29,7 +29,7 @@
 
 	// x axis value, label, and scale (reported data)
 	const xValue = (item: MigrantDataItem) => new Date(item['Reported Date'] as string);
-	const xValueLabel = 'Reported Date';
+	const xAxisLabel = 'Reported Date';
 	const xScale = d3
 		.scaleTime()
 		.domain(<Iterable<number>>d3.extent($migrantsData.migrants, xValue))
@@ -48,5 +48,9 @@
 		<AxisY {yScale} {innerWidth} tickOffset={10} />
 		<AxisX {xScale} {innerHeight} tickOffset={10} {formatTime} />
 		<Marks />
+		<text text-anchor="middle" transform={`translate(${-45}, ${innerHeight / 2}) rotate(-90)`}
+			>{yAxisLabel}</text
+		>
+		<text x={innerWidth / 2} y={innerHeight + 45} text-anchor="middle">{xAxisLabel}</text>
 	</g>
 </svg>
