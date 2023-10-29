@@ -7,7 +7,7 @@ const _migrantsDataStore = () => {
 
   return {
     subscribe,
-    set: (data: any) => set(data),
+    set: (data: MigrantsData) => set(data as any),
   }
 }
 
