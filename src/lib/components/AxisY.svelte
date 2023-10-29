@@ -2,8 +2,6 @@
 	export let yScale: any;
 	export let innerWidth: any;
 	export let tickOffset: number = 5;
-
-	console.log('yScale.ticks(): ', yScale.ticks());
 </script>
 
 {#each yScale.ticks() as tick, i}
