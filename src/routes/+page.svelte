@@ -21,11 +21,6 @@
 	// y axis value, label, and scale (total dead and missing)
 	const yValue = (item: MigrantDataItem) => item['Total Dead and Missing'];
 	const yAxisLabel = 'Total Dead and Missing';
-	const yScale = d3
-		.scaleLinear()
-		.domain(<Iterable<number>>d3.extent($migrantsData.migrants, yValue))
-		.range([innerHeight, 0])
-		.nice();
 
 	// x axis value, label, and scale (reported data)
 	const xValue = (item: MigrantDataItem) => new Date(item['Reported Date'] as string);
@@ -45,9 +40,18 @@
 		.bin()
 		.value(xValue as any)
 		.domain(xScale.domain() as any)
-		.thresholds(d3.timeMonths(start, stop) as any)($migrantsData.migrants as Array<number>);
+		.thresholds(d3.timeMonths(start, stop) as any)($migrantsData.migrants as Array<number>)
+		.map((array: any) => ({
+			y: d3.sum(array, yValue),
+			x0: array.x0,
+			x1: array.x1
+		}));
 
-	console.log(binnedData);
+	const yScale = d3
+		.scaleLinear()
+		.domain([0, d3.max(binnedData, (d) => d.y)])
+		.range([innerHeight, 0])
+		.nice();
 </script>
 
 <!-- SVG Container -->
