@@ -38,8 +38,6 @@
 
 	// formatter for date data
 	const formatTime = d3.timeFormat('%m/%d/%Y');
-
-	console.log('$migrantsData.migrants: ', $migrantsData.migrants[0]);
 </script>
 
 <!-- SVG Container -->
