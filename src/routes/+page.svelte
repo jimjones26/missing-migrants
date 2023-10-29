@@ -27,6 +27,18 @@
 		.range([innerHeight, 0])
 		.nice();
 
+	// x axis value, label, and scale (reported data)
+	const xValue = (item: MigrantDataItem) => new Date(item['Reported Date'] as string);
+	const xValueLabel = 'Reported Date';
+	const xScale = d3
+		.scaleTime()
+		.domain(<Iterable<number>>d3.extent($migrantsData.migrants, xValue))
+		.range([0, innerWidth])
+		.nice();
+
+	// formatter for date data
+	const formatTime = d3.timeFormat('%m/%d/%Y');
+
 	console.log('$migrantsData.migrants: ', $migrantsData.migrants[0]);
 </script>
 
@@ -34,7 +46,7 @@
 <svg {width} {height}>
 	<g transform={`translate(${margin.left}, ${margin.top})`}>
 		<AxisY {yScale} {innerWidth} tickOffset={10} />
-		<AxisX />
+		<AxisX {xScale} {innerHeight} tickOffset={10} {formatTime} />
 		<Marks />
 	</g>
 </svg>
