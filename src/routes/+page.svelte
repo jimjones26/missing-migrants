@@ -59,7 +59,7 @@
 	<g transform={`translate(${margin.left}, ${margin.top})`}>
 		<AxisY {yScale} {innerWidth} tickOffset={10} />
 		<AxisX {xScale} {innerHeight} tickOffset={10} {formatTime} />
-		<Marks data={binnedData} {xScale} {yScale} opacity={0.5} {innerHeight} />
+		<Marks data={binnedData} {xScale} {yScale} opacity={1} {innerHeight} />
 		<text text-anchor="middle" transform={`translate(${-45}, ${innerHeight / 2}) rotate(-90)`}
 			>{yAxisLabel}</text
 		>
