@@ -38,6 +38,16 @@
 
 	// formatter for date data
 	const formatTime = d3.timeFormat('%m/%d/%Y');
+
+	// aggregate data into bins
+	const [start, stop] = xScale.domain();
+	const binnedData = d3
+		.bin()
+		.value(xValue as any)
+		.domain(xScale.domain() as any)
+		.thresholds(d3.timeMonths(start, stop) as any)($migrantsData.migrants as Array<number>);
+
+	console.log(binnedData);
 </script>
 
 <!-- SVG Container -->
